@@ -43,7 +43,13 @@ The Flight Price Predictor is a web application built with Flask that predicts f
 
 - **Scikit-learn:** We appreciate the Scikit-learn library for providing powerful tools for predictive modeling.
 
-- **Your Contributors:** A big thank you to all contributors who have dedicated time and effort to enhance this project.
+- **NumPy:** Heartfelt thanks to the NumPy community for developing a fundamental library that forms the backbone of numerical computing in Python.
+
+- **Pandas:** Special appreciation to the Pandas development team for creating an indispensable tool for data manipulation and analysis, making our project more efficient and effective.
+
+- **Matplotlib:** A big thanks to the Matplotlib developers for providing an extensive and flexible plotting library, adding a visual dimension to our data exploration and presentation.
+
+- **Seaborn:** We express our gratitude to the Seaborn community for enhancing our data visualization capabilities with a high-level interface to Matplotlib, making our plots more aesthetically pleasing and informative.
 
 - **Open Source Community:** Gratitude to the broader open-source community for sharing knowledge and fostering collaboration.
 
