@@ -1,12 +1,12 @@
+# Required Libraries
 from flask import Flask, request, render_template
 from flask_cors import cross_origin
 import pickle
 import pandas as pd
 
+# Initialising our app
 app = Flask(__name__)
-model = pickle.load(open("E:\Data Science\ML Deployment\Heroku Deployment\model.pkl", "rb"))
-
-
+model = pickle.load(open("model.pkl", "rb"))
 
 @app.route("/")
 @cross_origin()
@@ -17,13 +17,12 @@ def home():
 # It means that the browser should permit requests from different origins (domains) to access this route.
 # This is important when your frontend, hosted on a different domain, needs to make requests to your backend.
 
-
-
+# Define the route for the home page, which renders the index.html template
 @app.route("/predict", methods = ["GET", "POST"])
 @cross_origin()
 def predict():
     if request.method == "POST":
-
+        # Extract input features from the form
         # Date 
         date_dep = request.form["Dep_Time"]
         Journey_day = int(pd.to_datetime(date_dep, format="%Y-%m-%dT%H:%M").day)
@@ -50,7 +49,7 @@ def predict():
         Total_stops = int(request.form["stops"])
        
 
-        
+        # Source and Destination processing to create binary variables
         airline=request.form['airline']
         if(airline=='Jet Airways'):
             Jet_Airways = 1
@@ -282,7 +281,8 @@ def predict():
             d_New_Delhi = 0
             d_Hyderabad = 0
             d_Kolkata = 0
-        
+            
+        # Predict the flight price using the loaded model
         prediction=model.predict([[
             Total_stops,
             Journey_day,
@@ -315,15 +315,13 @@ def predict():
             d_New_Delhi
         ]])
 
-        output=round(prediction[0],2)
+        # Round the prediction to two decimal places
+        output = round(prediction[0], 2)
 
-        return render_template('index.html',prediction_text="Your Flight Price is Rs. {}".format(output))
-
+        return render_template('index.html', prediction_text="Your Flight Price is Rs. {}".format(output))
 
     return render_template("index.html")
 
-
-
-
+# Run the Flask web application in debug mode
 if __name__ == "__main__":
     app.run(debug=True)
